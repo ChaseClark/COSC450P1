@@ -70,8 +70,9 @@ void print_matrix(int **array, int rows, int cols)
     {
         for (int j = 0; j < cols; j++)
         {
-            fprintf(outputFile, "array value: %d\n", array[i][j]);
+            fprintf(outputFile, "%d\t", array[i][j]);
         }
+        fprintf(outputFile, "\n");
     }
 }
 
@@ -89,20 +90,43 @@ void create_matrices()
         matrixA[i] = (int *)malloc(x * sizeof(int));
     }
 
-    // dimensions of matrix B is X * 5
-    // int matrixB[SIZE / 5][5];
     int input_idx = 0;
 
     for (int i = 0; i < 5; i++)
     {
-        for (int j = 0; j < (SIZE / 5); j++)
+        for (int j = 0; j < x; j++)
         {
             matrixA[i][j] = inputArray[input_idx];
             input_idx++;
         }
     }
-
+    fprintf(outputFile, "Matrix A\n===========\n");
     print_matrix(matrixA, 5, x);
+
+    // matrix B
+    // dimensions of matrix B is X * 5
+    int **matrixB;
+
+    // allocate an array of array for matrixB
+    matrixB = (int **)malloc(x * sizeof(int *));
+    // allocate space for each entry in matrixB
+    for (int i = 0; i < x; i++)
+    {
+        matrixB[i] = (int *)malloc(5 * sizeof(int));
+    }
+
+    input_idx = 0;
+
+    for (int i = 0; i < x; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            matrixB[i][j] = inputArray[input_idx];
+            input_idx++;
+        }
+    }
+    fprintf(outputFile, "\n\nMatrix B\n===========\n");
+    print_matrix(matrixB, x, 5);
 }
 
 // main function of program
