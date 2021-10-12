@@ -1,11 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 // init variables
 int SIZE;
-int matrixA[10000][10000];
-int matrixB[10000][10000];
 int c;
-int inputArray[10000];
+int *inputArray;
 int currentNumber;
 FILE *inputFile;
 FILE *outputFile;
@@ -38,6 +38,12 @@ void process_input_file()
     SIZE = idx + 1;
 }
 
+void create_matrices()
+{
+    // int s = SIZE;
+    // int matrixA[s][s / 2];
+}
+
 // function that writes array to output file
 void print_to_file()
 {
@@ -62,6 +68,7 @@ void print_to_file()
 int main()
 {
     process_input_file();
+    // create_matrices();
     print_to_file();
     return 0;
 }
