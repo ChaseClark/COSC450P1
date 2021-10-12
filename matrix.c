@@ -5,7 +5,7 @@
 // init variables
 int SIZE;
 int c;
-int *inputArray;
+int inputArray[100000];
 int currentNumber;
 FILE *inputFile;
 FILE *outputFile;
@@ -38,17 +38,11 @@ void process_input_file()
     SIZE = idx + 1;
 }
 
-void create_matrices()
-{
-    // int s = SIZE;
-    // int matrixA[s][s / 2];
-}
-
-// function that writes array to output file
+// function that writes matrix to output file
+// params Array, num_rows,num_cols
 void print_to_file()
 {
     // remove("COSC450_P1_Output.txt");
-    outputFile = fopen("COSC450_P1_Output.txt", "w");
     if (outputFile == NULL)
     {
         // file not found
@@ -59,16 +53,65 @@ void print_to_file()
     {
         fprintf(outputFile, "Some text: %d\n", inputArray[i]);
     }
-
-    fclose(outputFile);
+    // fclose(outputFile);
     return;
+}
+
+void print_matrix(int **array, int rows, int cols)
+{
+    printf("\nPrinting matrix...\n");
+    if (outputFile == NULL)
+    {
+        // file not found
+        printf("Output file not found!\n");
+        exit(-1);
+    }
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            fprintf(outputFile, "array value: %d\n", array[i][j]);
+        }
+    }
+}
+
+void create_matrices()
+{
+    int x = SIZE / 5;
+    // dimensions of matrix A is 5 * X
+    int **matrixA;
+
+    // allocate an array of array for matrixA
+    matrixA = (int **)malloc(5 * sizeof(int *));
+    // allocate space for each entry in matrixA
+    for (int i = 0; i < 5; i++)
+    {
+        matrixA[i] = (int *)malloc(x * sizeof(int));
+    }
+
+    // dimensions of matrix B is X * 5
+    // int matrixB[SIZE / 5][5];
+    int input_idx = 0;
+
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < (SIZE / 5); j++)
+        {
+            matrixA[i][j] = inputArray[input_idx];
+            input_idx++;
+        }
+    }
+
+    print_matrix(matrixA, 5, x);
 }
 
 // main function of program
 int main()
 {
+    outputFile = fopen("COSC450_P1_Output.txt", "w");
     process_input_file();
-    // create_matrices();
-    print_to_file();
+    create_matrices();
+    // print_to_file();
+    fclose(outputFile);
     return 0;
 }
