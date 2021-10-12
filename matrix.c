@@ -10,6 +10,7 @@ int currentNumber;
 FILE *inputFile;
 FILE *outputFile;
 
+// this method takes our input file and reads it into an array
 void process_input_file()
 {
     // read all numbers from input file
@@ -57,6 +58,7 @@ void print_to_file()
     return;
 }
 
+// this method takes in an array and prints it to the output file
 void print_matrix(int **array, int rows, int cols)
 {
     printf("\nPrinting matrix...\n");
@@ -76,6 +78,7 @@ void print_matrix(int **array, int rows, int cols)
     }
 }
 
+// create our matrices and multiply them together
 void create_matrices()
 {
     int x = SIZE / 5;
@@ -127,6 +130,21 @@ void create_matrices()
     }
     fprintf(outputFile, "\n\nMatrix B\n===========\n");
     print_matrix(matrixB, x, 5);
+
+    // product matrix
+    // this will be a 5 x 5 matrix
+    long productMatrix[5][5];
+
+    // multiply each row in matrixA by each col in maxtrixB
+    for (int r = 0; r < 5; r++)
+    {
+        for (int c = 0; c < 5; c++)
+        {
+           
+        }
+        
+    }
+    
 }
 
 // main function of program
