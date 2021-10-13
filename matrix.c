@@ -133,18 +133,35 @@ void create_matrices()
 
     // product matrix
     // this will be a 5 x 5 matrix
-    long productMatrix[5][5];
+    long **productMatrix;
+
+    // allocate an array of array for productMatrix
+    productMatrix = (long **)malloc(5 * sizeof(long *));
+    // allocate space for each entry in productMatrix
+    for (int i = 0; i < 5; i++)
+    {
+        productMatrix[i] = (long *)malloc(5 * sizeof(long));
+    }
 
     // multiply each row in matrixA by each col in maxtrixB
     for (int r = 0; r < 5; r++)
     {
         for (int c = 0; c < 5; c++)
         {
-           
+            long sum = 0;
+            // printf("%d * %d\n", matrixA[r][c], matrixB[r][c]);
+            // now we need to loop through and calculate
+            for (int i = 0; i < x; i++)
+            {
+                printf("%d * %d +", matrixA[c][i], matrixB[i][c]);
+                sum += matrixA[r][i] * matrixB[i][c];
+            }
+            productMatrix[r][c] = sum;
+            printf("---- row: %d, col: %d, sum: %d\n", r, c, sum);
         }
-        
     }
-    
+    fprintf(outputFile, "\n\nProduct Matrix\n===========\n");
+    print_matrix(productMatrix, 5, 5);
 }
 
 // main function of program
