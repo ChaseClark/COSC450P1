@@ -72,7 +72,27 @@ void print_matrix(int **array, int rows, int cols)
     {
         for (int j = 0; j < cols; j++)
         {
-            fprintf(outputFile, "%d\t", array[i][j]);
+            fprintf(outputFile, "%d\t\t", array[i][j]);
+        }
+        fprintf(outputFile, "\n");
+    }
+}
+
+// this method takes in an array and prints it to the output file
+void print_long_matrix(long **array, int rows, int cols)
+{
+    printf("\nPrinting matrix...\n");
+    if (outputFile == NULL)
+    {
+        // file not found
+        printf("Output file not found!\n");
+        exit(-1);
+    }
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            fprintf(outputFile, "%d\t\t", array[i][j]);
         }
         fprintf(outputFile, "\n");
     }
@@ -103,7 +123,7 @@ void create_matrices()
             input_idx++;
         }
     }
-    fprintf(outputFile, "Matrix A\n===========\n");
+    fprintf(outputFile, "Matrix A\n=======================================\n");
     print_matrix(matrixA, 5, x);
 
     // matrix B
@@ -128,7 +148,7 @@ void create_matrices()
             input_idx++;
         }
     }
-    fprintf(outputFile, "\n\nMatrix B\n===========\n");
+    fprintf(outputFile, "\n\nMatrix B\n=======================================\n");
     print_matrix(matrixB, x, 5);
 
     // product matrix
@@ -153,15 +173,16 @@ void create_matrices()
             // now we need to loop through and calculate
             for (int i = 0; i < x; i++)
             {
-                printf("%d * %d +", matrixA[c][i], matrixB[i][c]);
-                sum += matrixA[r][i] * matrixB[i][c];
+                printf("%d * %d +", matrixA[r][i], matrixB[i][c]);
+                sum += (long)(matrixA[r][i] * matrixB[i][c]);
+                // productMatrix[r][c] += matrixA[r][i] * matrixB[i][c];
             }
             productMatrix[r][c] = sum;
             printf("---- row: %d, col: %d, sum: %d\n", r, c, sum);
         }
     }
-    fprintf(outputFile, "\n\nProduct Matrix\n===========\n");
-    print_matrix(productMatrix, 5, 5);
+    fprintf(outputFile, "\n\nProduct Matrix\n=======================================\n");
+    print_long_matrix(productMatrix, 5, 5);
 }
 
 // main function of program

@@ -1,3 +1,5 @@
 to run program
 
 run matrix.exe in a command prompt
+
+https://www.tutorialspoint.com/matrix-multiplication-algorithm
