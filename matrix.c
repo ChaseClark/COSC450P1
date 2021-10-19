@@ -5,7 +5,7 @@
 // init variables
 int SIZE;
 int c;
-int inputArray[100000];
+int inputArray[100000]; // made large in case the input file is large
 int currentNumber;
 FILE *inputFile;
 FILE *outputFile;
@@ -39,26 +39,7 @@ void process_input_file()
     SIZE = idx + 1;
 }
 
-// function that writes matrix to output file
-// params Array, num_rows,num_cols
-void print_to_file()
-{
-    // remove("COSC450_P1_Output.txt");
-    if (outputFile == NULL)
-    {
-        // file not found
-        printf("Output file not found!\n");
-        exit(-1);
-    }
-    for (int i = 0; i < SIZE - 1; i++)
-    {
-        fprintf(outputFile, "Some text: %d\n", inputArray[i]);
-    }
-    // fclose(outputFile);
-    return;
-}
-
-// this method takes in an array and prints it to the output file
+// this method takes in an 2d array pointer and prints it to the output file
 void print_matrix(int **array, int rows, int cols)
 {
     printf("\nPrinting matrix...\n");
@@ -68,6 +49,7 @@ void print_matrix(int **array, int rows, int cols)
         printf("Output file not found!\n");
         exit(-1);
     }
+    // loop through each row and col and print the output
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
@@ -78,7 +60,7 @@ void print_matrix(int **array, int rows, int cols)
     }
 }
 
-// this method takes in an array and prints it to the output file
+// this method takes in an 2d long array pointer and prints it to the output file
 void print_long_matrix(long **array, int rows, int cols)
 {
     printf("\nPrinting matrix...\n");
@@ -88,6 +70,7 @@ void print_long_matrix(long **array, int rows, int cols)
         printf("Output file not found!\n");
         exit(-1);
     }
+    // loop through each row and col and print the output
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
@@ -113,12 +96,15 @@ void create_matrices()
         matrixA[i] = (int *)malloc(x * sizeof(int));
     }
 
+    // create a reference to our input array's index
     int input_idx = 0;
 
+    // loop through each index in the matrix
     for (int i = 0; i < 5; i++)
     {
         for (int j = 0; j < x; j++)
         {
+            // add the input to Matrix A
             matrixA[i][j] = inputArray[input_idx];
             input_idx++;
         }
@@ -140,10 +126,12 @@ void create_matrices()
 
     input_idx = 0;
 
+    // loop through each index in the matrix
     for (int i = 0; i < x; i++)
     {
         for (int j = 0; j < 5; j++)
         {
+            // add the input to Matrix B
             matrixB[i][j] = inputArray[input_idx];
             input_idx++;
         }
@@ -169,13 +157,11 @@ void create_matrices()
         for (int c = 0; c < 5; c++)
         {
             long sum = 0;
-            // printf("%d * %d\n", matrixA[r][c], matrixB[r][c]);
             // now we need to loop through and calculate
             for (int i = 0; i < x; i++)
             {
                 printf("%d * %d +", matrixA[r][i], matrixB[i][c]);
                 sum += (long)(matrixA[r][i] * matrixB[i][c]);
-                // productMatrix[r][c] += matrixA[r][i] * matrixB[i][c];
             }
             productMatrix[r][c] = sum;
             printf("---- row: %d, col: %d, sum: %d\n", r, c, sum);
@@ -191,7 +177,6 @@ int main()
     outputFile = fopen("COSC450_P1_Output.txt", "w");
     process_input_file();
     create_matrices();
-    // print_to_file();
     fclose(outputFile);
     return 0;
 }
