@@ -54,7 +54,7 @@ void print_matrix(int **array, int rows, int cols)
     {
         for (int j = 0; j < cols; j++)
         {
-            fprintf(outputFile, "%-20d", array[i][j]);
+            fprintf(outputFile, "%-10d", array[i][j]);
         }
         fprintf(outputFile, "\n");
     }
@@ -75,7 +75,7 @@ void print_long_matrix(long **array, int rows, int cols)
     {
         for (int j = 0; j < cols; j++)
         {
-            fprintf(outputFile, "%-20d", array[i][j]);
+            fprintf(outputFile, "%-10d", array[i][j]);
         }
         fprintf(outputFile, "\n");
     }
